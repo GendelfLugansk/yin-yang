@@ -786,6 +786,10 @@ body.light-colors {
       background-color: #00b8ff;
     }
   }
+
+  .left, .right, .colors {
+    color: #333;
+  }
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -841,7 +845,6 @@ html, body {
   top: 50%;
   transform: translateY(-50%);
   color: #fff;
-  text-shadow: 0 0 0.2em #000;
 
   &:hover {
     transform: scale(1.1) translateY(-50%);
