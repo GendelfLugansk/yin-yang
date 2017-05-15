@@ -52,7 +52,8 @@ $(function () {
         }
     });
 
-    $('.colors').click(function () {
+    $('.colors').click(function (e) {
+        e.preventDefault();
         $('body').toggleClass('light-colors');
     });
 });
