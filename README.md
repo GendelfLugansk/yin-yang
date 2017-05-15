@@ -13,8 +13,8 @@ Works in modern browsers:
 
 This animation works best in Chrome/Firefox/Safari. In MS Edge it's shaky.
 
-You can customize glow color by changing `$glowColor` variable in `src/style.scss` and rebuilding
-project (instructions below).
+You can customize glow color by changing `$glowColor` argument of a `taijitu` mixin and 
+rebuilding project (instructions below).
 
 # Develop & Build
 

@@ -1,23 +1,15 @@
 //----------------------------------------------------------------------------------------------------------------------
-// Configuration
+// Mixin is used to create few yin-yang symbols with different colors
 //----------------------------------------------------------------------------------------------------------------------
 
-$taijituSize: 200px;
-$whiteBgColor: #fff;
-$blackBgColor: #000;
-$taijituBorderWidth: 4px;
-$baseZIndex: 0;
-$glowColor: #98ff00;
-$animation1Duration: 3s;
-$animation2Duration: 12s;
-$animation3Duration: 12s;
-$animation4SpinDuration: 4s;
+@mixin taijitu(
+  $taijituSize: 200px, $glowColor: #98ff00, $animation1Duration: 3s, $animation2Duration: 12s,
+  $animation3Duration: 12s,$animation4SpinDuration: 4s, $taijituBorderWidth: 4px, $blackBgColor: #000, $whiteBgColor: #fff, $baseZIndex: 0) {
 
-//----------------------------------------------------------------------------------------------------------------------
-// Basic taijitu styles
-//----------------------------------------------------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------
+  // Basic taijitu styles
+  //--------------------------------------------------------------------------------------------------------------------
 
-.taijitu {
   box-sizing: border-box;
   width: $taijituSize;
   height: $taijituSize;
@@ -114,7 +106,7 @@ $animation4SpinDuration: 4s;
     z-index: $baseZIndex + 2;
     box-shadow: 0 0 $taijituSize/6 $taijituSize/20 lighten($glowColor, 45%),
     0 0 $taijituSize/3 0 $glowColor,
-    0 0 $taijituSize $taijituSize/4 lighten($glowColor, 30%),
+    0 0 $taijituSize/2 $taijituSize/8 lighten($glowColor, 30%),
     inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
     inset 0 0 $taijituSize/1.4 0 $glowColor;
   }
@@ -257,23 +249,43 @@ $animation4SpinDuration: 4s;
       }
     }
   }
-}
 
-//----------------------------------------------------------------------------------------------------------------------
-// Animations
-//----------------------------------------------------------------------------------------------------------------------
-
-.taijitu {
+  //--------------------------------------------------------------------------------------------------------------------
+  // Animations
+  //--------------------------------------------------------------------------------------------------------------------
+  $animation-1-taijitu-glow: unique_id();
+  $animation-1-trigram-glow: unique_id();
+  $animation-2-taijitu-glow: unique_id();
+  $animation-2-trigram-glow: unique_id();
+  $animation-2-trigram-sky: unique_id();
+  $animation-2-trigram-wind: unique_id();
+  $animation-2-trigram-water: unique_id();
+  $animation-2-trigram-mountain: unique_id();
+  $animation-2-trigram-earth: unique_id();
+  $animation-2-trigram-thunder: unique_id();
+  $animation-2-trigram-fire: unique_id();
+  $animation-2-trigram-lake: unique_id();
+  $animation-3-taijitu-glow: unique_id();
+  $animation-3-trigram-glow: unique_id();
+  $animation-3-trigram-sky: unique_id();
+  $animation-3-trigram-wind: unique_id();
+  $animation-3-trigram-water: unique_id();
+  $animation-3-trigram-mountain: unique_id();
+  $animation-3-trigram-earth: unique_id();
+  $animation-3-trigram-thunder: unique_id();
+  $animation-3-trigram-fire: unique_id();
+  $animation-3-trigram-lake: unique_id();
+  $animation-spin: unique_id();
 
   //Animation 1 - just glow
   &.animation-1 {
     &::after {
-      animation: animation-1-taijitu-glow $animation1Duration alternate-reverse infinite;
+      animation: $animation-1-taijitu-glow $animation1Duration alternate-reverse infinite;
     }
 
     .trigram > div {
       &::before, &::after {
-        animation: animation-1-trigram-glow $animation1Duration alternate-reverse infinite;
+        animation: $animation-1-trigram-glow $animation1Duration alternate-reverse infinite;
       }
     }
   }
@@ -286,13 +298,13 @@ $animation4SpinDuration: 4s;
       0 0 $taijituSize/4 $taijituSize/16 lighten($glowColor, 30%),
       inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
       inset 0 0 $taijituSize/1.4 0 $glowColor;
-      animation: animation-2-taijitu-glow $animation2Duration infinite linear;
+      animation: $animation-2-taijitu-glow $animation2Duration infinite linear;
       animation-delay: $animation2Duration*.72/9;
     }
 
     .trigram > div {
       &::before, &::after {
-        animation: animation-2-trigram-glow $animation2Duration infinite linear;
+        animation: $animation-2-trigram-glow $animation2Duration infinite linear;
         animation-delay: $animation2Duration*.72/9;
       }
     }
@@ -306,28 +318,28 @@ $animation4SpinDuration: 4s;
       animation-delay: $animation2Duration*.72/9;
 
       &.sky {
-        animation-name: animation-2-trigram-sky;
+        animation-name: $animation-2-trigram-sky;
       }
       &.wind {
-        animation-name: animation-2-trigram-wind;
+        animation-name: $animation-2-trigram-wind;
       }
       &.water {
-        animation-name: animation-2-trigram-water;
+        animation-name: $animation-2-trigram-water;
       }
       &.mountain {
-        animation-name: animation-2-trigram-mountain;
+        animation-name: $animation-2-trigram-mountain;
       }
       &.earth {
-        animation-name: animation-2-trigram-earth;
+        animation-name: $animation-2-trigram-earth;
       }
       &.thunder {
-        animation-name: animation-2-trigram-thunder;
+        animation-name: $animation-2-trigram-thunder;
       }
       &.fire {
-        animation-name: animation-2-trigram-fire;
+        animation-name: $animation-2-trigram-fire;
       }
       &.lake {
-        animation-name: animation-2-trigram-lake;
+        animation-name: $animation-2-trigram-lake;
       }
     }
   }
@@ -348,13 +360,13 @@ $animation4SpinDuration: 4s;
       0 0 $taijituSize/4 $taijituSize/16 lighten($glowColor, 30%),
       inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
       inset 0 0 $taijituSize/1.4 0 $glowColor;
-      animation: animation-3-taijitu-glow $animation3Duration infinite linear;
+      animation: $animation-3-taijitu-glow $animation3Duration infinite linear;
       animation-delay: $animation3Duration*.72/9;
     }
 
     .trigram > div {
       &::before, &::after {
-        animation: animation-3-trigram-glow $animation3Duration infinite linear;
+        animation: $animation-3-trigram-glow $animation3Duration infinite linear;
         animation-delay: $animation3Duration*.72/9;
       }
     }
@@ -368,28 +380,28 @@ $animation4SpinDuration: 4s;
       animation-delay: $animation3Duration*.72/9;
 
       &.sky {
-        animation-name: animation-3-trigram-sky;
+        animation-name: $animation-3-trigram-sky;
       }
       &.wind {
-        animation-name: animation-3-trigram-wind;
+        animation-name: $animation-3-trigram-wind;
       }
       &.water {
-        animation-name: animation-3-trigram-water;
+        animation-name: $animation-3-trigram-water;
       }
       &.mountain {
-        animation-name: animation-3-trigram-mountain;
+        animation-name: $animation-3-trigram-mountain;
       }
       &.earth {
-        animation-name: animation-3-trigram-earth;
+        animation-name: $animation-3-trigram-earth;
       }
       &.thunder {
-        animation-name: animation-3-trigram-thunder;
+        animation-name: $animation-3-trigram-thunder;
       }
       &.fire {
-        animation-name: animation-3-trigram-fire;
+        animation-name: $animation-3-trigram-fire;
       }
       &.lake {
-        animation-name: animation-3-trigram-lake;
+        animation-name: $animation-3-trigram-lake;
       }
     }
   }
@@ -405,353 +417,374 @@ $animation4SpinDuration: 4s;
   //Animation 1 + rotate
   &.animation-4 {
     @extend .animation-1;
-    animation: spin $animation4SpinDuration infinite;
+    animation: $animation-spin $animation4SpinDuration infinite;
+  }
+
+  //Keyframes for first animation
+  @keyframes #{$animation-1-taijitu-glow} {
+    0% {
+      box-shadow: 0 0 $taijituSize/6 $taijituSize/20 lighten($glowColor, 45%),
+      0 0 $taijituSize/3 0 $glowColor,
+      0 0 $taijituSize/2 $taijituSize/8 lighten($glowColor, 30%),
+      inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
+      inset 0 0 $taijituSize/1.4 0 $glowColor;
+    }
+
+    100% {
+      box-shadow: 0 0 $taijituSize/12 $taijituSize/40 lighten($glowColor, 45%),
+      0 0 $taijituSize/6 0 $glowColor,
+      0 0 $taijituSize/4 $taijituSize/16 lighten($glowColor, 30%),
+      inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
+      inset 0 0 $taijituSize/1.4 0 $glowColor;
+    }
+  }
+
+  @keyframes #{$animation-1-trigram-glow} {
+    0% {
+      box-shadow: 0 0 $taijituSize/5 0 $glowColor;
+    }
+
+    100% {
+      box-shadow: 0 0 $taijituSize/10 0 $glowColor;
+    }
+  }
+
+  //Rotation keyframe for animation-4
+  @keyframes #{$animation-spin} {
+    0% {
+      transform: rotate(0);
+    }
+
+    100% {
+      transform: rotate(359deg);
+    }
+  }
+
+  //Keyframes for second animation
+  @keyframes #{$animation-2-taijitu-glow} {
+    0% {
+      box-shadow: 0 0 $taijituSize/24 $taijituSize/80 lighten($glowColor, 45%),
+      0 0 $taijituSize/6 0 $glowColor,
+      0 0 $taijituSize/4 $taijituSize/16 lighten($glowColor, 30%),
+      inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
+      inset 0 0 $taijituSize/1.4 0 $glowColor;
+    }
+
+    66% {
+      box-shadow: 0 0 $taijituSize/6 $taijituSize/20 lighten($glowColor, 45%),
+      0 0 $taijituSize/3 0 $glowColor,
+      0 0 $taijituSize/2 $taijituSize/8 lighten($glowColor, 30%),
+      inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
+      inset 0 0 $taijituSize/1.4 0 $glowColor;
+    }
+
+    90%, 100% {
+      box-shadow: 0 0 $taijituSize/24 $taijituSize/80 lighten($glowColor, 45%),
+      0 0 $taijituSize/6 0 $glowColor,
+      0 0 $taijituSize/4 $taijituSize/16 lighten($glowColor, 30%),
+      inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
+      inset 0 0 $taijituSize/1.4 0 $glowColor;
+    }
+  }
+
+  @keyframes #{$animation-2-trigram-glow} {
+    0% {
+      box-shadow: 0 0 $taijituSize/10 0 $glowColor;
+    }
+
+    66% {
+      box-shadow: 0 0 $taijituSize/5 0 $glowColor;
+    }
+
+    90%, 100% {
+      box-shadow: 0 0 $taijituSize/10 0 $glowColor;
+    }
+  }
+
+  @keyframes #{$animation-2-trigram-sky} {
+    0% {
+      opacity: 0;
+    }
+
+    2%, 66% {
+      opacity: 1;
+    }
+
+    90%, 100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes #{$animation-2-trigram-wind} {
+    0%, 8% {
+      opacity: 0;
+    }
+
+    10%, 66% {
+      opacity: 1;
+    }
+
+    90%, 100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes #{$animation-2-trigram-water} {
+    0%, 16% {
+      opacity: 0;
+    }
+
+    18%, 66% {
+      opacity: 1;
+    }
+
+    90%, 100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes #{$animation-2-trigram-mountain} {
+    0%, 24% {
+      opacity: 0;
+    }
+
+    26%, 66% {
+      opacity: 1;
+    }
+
+    90%, 100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes #{$animation-2-trigram-earth} {
+    0%, 32% {
+      opacity: 0;
+    }
+
+    34%, 66% {
+      opacity: 1;
+    }
+
+    90%, 100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes #{$animation-2-trigram-thunder} {
+    0%, 40% {
+      opacity: 0;
+    }
+
+    42%, 66% {
+      opacity: 1;
+    }
+
+    90%, 100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes #{$animation-2-trigram-fire} {
+    0%, 48% {
+      opacity: 0;
+    }
+
+    50%, 66% {
+      opacity: 1;
+    }
+
+    90%, 100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes #{$animation-2-trigram-lake} {
+    0%, 56% {
+      opacity: 0;
+    }
+
+    58%, 66% {
+      opacity: 1;
+    }
+
+    90%, 100% {
+      opacity: 0;
+    }
+  }
+
+  //Animation 3 keyframes
+  @keyframes #{$animation-3-taijitu-glow} {
+    0% {
+      box-shadow: 0 0 $taijituSize/24 $taijituSize/80 lighten($glowColor, 45%),
+      0 0 $taijituSize/6 0 $glowColor,
+      0 0 $taijituSize/4 $taijituSize/16 lighten($glowColor, 30%),
+      inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
+      inset 0 0 $taijituSize/1.4 0 $glowColor;
+    }
+
+    66% {
+      box-shadow: 0 0 $taijituSize/6 $taijituSize/20 lighten($glowColor, 45%),
+      0 0 $taijituSize/3 0 $glowColor,
+      0 0 $taijituSize/2 $taijituSize/8 lighten($glowColor, 30%),
+      inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
+      inset 0 0 $taijituSize/1.4 0 $glowColor;
+    }
+
+    90%, 100% {
+      box-shadow: 0 0 $taijituSize/24 $taijituSize/80 lighten($glowColor, 45%),
+      0 0 $taijituSize/6 0 $glowColor,
+      0 0 $taijituSize/4 $taijituSize/16 lighten($glowColor, 30%),
+      inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
+      inset 0 0 $taijituSize/1.4 0 $glowColor;
+    }
+  }
+
+  @keyframes #{$animation-3-trigram-glow} {
+    0% {
+      box-shadow: 0 0 $taijituSize/10 0 $glowColor;
+    }
+
+    66% {
+      box-shadow: 0 0 $taijituSize/5 0 $glowColor;
+    }
+
+    90%, 100% {
+      box-shadow: 0 0 $taijituSize/10 0 $glowColor;
+    }
+  }
+
+  @keyframes #{$animation-3-trigram-sky} {
+    0% {
+      opacity: 0;
+    }
+
+    2%, 66% {
+      opacity: 1;
+    }
+
+    90%, 100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes #{$animation-3-trigram-lake} {
+    0%, 8% {
+      opacity: 0;
+    }
+
+    10%, 66% {
+      opacity: 1;
+    }
+
+    90%, 100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes #{$animation-3-trigram-fire} {
+    0%, 16% {
+      opacity: 0;
+    }
+
+    18%, 66% {
+      opacity: 1;
+    }
+
+    90%, 100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes #{$animation-3-trigram-thunder} {
+    0%, 24% {
+      opacity: 0;
+    }
+
+    26%, 66% {
+      opacity: 1;
+    }
+
+    90%, 100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes #{$animation-3-trigram-earth} {
+    0%, 32% {
+      opacity: 0;
+    }
+
+    34%, 66% {
+      opacity: 1;
+    }
+
+    90%, 100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes #{$animation-3-trigram-mountain} {
+    0%, 40% {
+      opacity: 0;
+    }
+
+    42%, 66% {
+      opacity: 1;
+    }
+
+    90%, 100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes #{$animation-3-trigram-water} {
+    0%, 48% {
+      opacity: 0;
+    }
+
+    50%, 66% {
+      opacity: 1;
+    }
+
+    90%, 100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes #{$animation-3-trigram-wind} {
+    0%, 56% {
+      opacity: 0;
+    }
+
+    58%, 66% {
+      opacity: 1;
+    }
+
+    90%, 100% {
+      opacity: 0;
+    }
   }
 }
 
-//Keyframes for first animation
-@keyframes animation-1-taijitu-glow {
-  0% {
-    box-shadow: 0 0 $taijituSize/6 $taijituSize/20 lighten($glowColor, 45%),
-    0 0 $taijituSize/3 0 $glowColor,
-    0 0 $taijituSize $taijituSize/4 lighten($glowColor, 30%),
-    inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
-    inset 0 0 $taijituSize/1.4 0 $glowColor;
-  }
-
-  100% {
-    box-shadow: 0 0 $taijituSize/12 $taijituSize/40 lighten($glowColor, 45%),
-    0 0 $taijituSize/6 0 $glowColor,
-    0 0 $taijituSize/2 $taijituSize/8 lighten($glowColor, 30%),
-    inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
-    inset 0 0 $taijituSize/1.4 0 $glowColor;
-  }
+.taijitu {
+  @include taijitu(216px);
 }
 
-@keyframes animation-1-trigram-glow {
-  0% {
-    box-shadow: 0 0 $taijituSize/6 0 $glowColor;
+body.light-colors {
+  .container {
+    background: #fff;
+    color: #000;
+
+    .taijitu {
+      @include taijitu(216px, #00b8ff);
+    }
   }
 
-  100% {
-    box-shadow: 0 0 $taijituSize/12 0 $glowColor;
-  }
-}
-
-//Rotation keyframe for animation-4
-@keyframes spin {
-  0% {
-    transform: rotate(0);
-  }
-
-  100% {
-    transform: rotate(359deg);
-  }
-}
-
-//Keyframes for second animation
-@keyframes animation-2-taijitu-glow {
-  0% {
-    box-shadow: 0 0 $taijituSize/24 $taijituSize/80 lighten($glowColor, 45%),
-    0 0 $taijituSize/6 0 $glowColor,
-    0 0 $taijituSize/4 $taijituSize/16 lighten($glowColor, 30%),
-    inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
-    inset 0 0 $taijituSize/1.4 0 $glowColor;
-  }
-
-  66% {
-    box-shadow: 0 0 $taijituSize/6 $taijituSize/20 lighten($glowColor, 45%),
-    0 0 $taijituSize/3 0 $glowColor,
-    0 0 $taijituSize $taijituSize/4 lighten($glowColor, 30%),
-    inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
-    inset 0 0 $taijituSize/1.4 0 $glowColor;
-  }
-
-  90%, 100% {
-    box-shadow: 0 0 $taijituSize/24 $taijituSize/80 lighten($glowColor, 45%),
-    0 0 $taijituSize/6 0 $glowColor,
-    0 0 $taijituSize/4 $taijituSize/16 lighten($glowColor, 30%),
-    inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
-    inset 0 0 $taijituSize/1.4 0 $glowColor;
-  }
-}
-
-@keyframes animation-2-trigram-glow {
-  0% {
-    box-shadow: 0 0 $taijituSize/12 0 $glowColor;
-  }
-
-  66% {
-    box-shadow: 0 0 $taijituSize/6 0 $glowColor;
-  }
-
-  90%, 100% {
-    box-shadow: 0 0 $taijituSize/12 0 $glowColor;
-  }
-}
-
-@keyframes animation-2-trigram-sky {
-  0% {
-    opacity: 0;
-  }
-  
-  2%, 66% {
-    opacity: 1;
-  }
-
-  90%, 100% {
-    opacity: 0;
-  }
-}
-
-@keyframes animation-2-trigram-wind {
-  0%, 8% {
-    opacity: 0;
-  }
-
-  10%, 66% {
-    opacity: 1;
-  }
-
-  90%, 100% {
-    opacity: 0;
-  }
-}
-
-@keyframes animation-2-trigram-water {
-  0%, 16% {
-    opacity: 0;
-  }
-
-  18%, 66% {
-    opacity: 1;
-  }
-
-  90%, 100% {
-    opacity: 0;
-  }
-}
-
-@keyframes animation-2-trigram-mountain {
-  0%, 24% {
-    opacity: 0;
-  }
-
-  26%, 66% {
-    opacity: 1;
-  }
-
-  90%, 100% {
-    opacity: 0;
-  }
-}
-
-@keyframes animation-2-trigram-earth {
-  0%, 32% {
-    opacity: 0;
-  }
-
-  34%, 66% {
-    opacity: 1;
-  }
-
-  90%, 100% {
-    opacity: 0;
-  }
-}
-
-@keyframes animation-2-trigram-thunder {
-  0%, 40% {
-    opacity: 0;
-  }
-
-  42%, 66% {
-    opacity: 1;
-  }
-
-  90%, 100% {
-    opacity: 0;
-  }
-}
-
-@keyframes animation-2-trigram-fire {
-  0%, 48% {
-    opacity: 0;
-  }
-
-  50%, 66% {
-    opacity: 1;
-  }
-
-  90%, 100% {
-    opacity: 0;
-  }
-}
-
-@keyframes animation-2-trigram-lake {
-  0%, 56% {
-    opacity: 0;
-  }
-
-  58%, 66% {
-    opacity: 1;
-  }
-
-  90%, 100% {
-    opacity: 0;
-  }
-}
-
-//Animation 3 keyframes
-@keyframes animation-3-taijitu-glow {
-  0% {
-    box-shadow: 0 0 $taijituSize/24 $taijituSize/80 lighten($glowColor, 45%),
-    0 0 $taijituSize/6 0 $glowColor,
-    0 0 $taijituSize/4 $taijituSize/16 lighten($glowColor, 30%),
-    inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
-    inset 0 0 $taijituSize/1.4 0 $glowColor;
-  }
-
-  66% {
-    box-shadow: 0 0 $taijituSize/6 $taijituSize/20 lighten($glowColor, 45%),
-    0 0 $taijituSize/3 0 $glowColor,
-    0 0 $taijituSize $taijituSize/4 lighten($glowColor, 30%),
-    inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
-    inset 0 0 $taijituSize/1.4 0 $glowColor;
-  }
-
-  90%, 100% {
-    box-shadow: 0 0 $taijituSize/24 $taijituSize/80 lighten($glowColor, 45%),
-    0 0 $taijituSize/6 0 $glowColor,
-    0 0 $taijituSize/4 $taijituSize/16 lighten($glowColor, 30%),
-    inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
-    inset 0 0 $taijituSize/1.4 0 $glowColor;
-  }
-}
-
-@keyframes animation-3-trigram-glow {
-  0% {
-    box-shadow: 0 0 $taijituSize/12 0 $glowColor;
-  }
-
-  66% {
-    box-shadow: 0 0 $taijituSize/6 0 $glowColor;
-  }
-
-  90%, 100% {
-    box-shadow: 0 0 $taijituSize/12 0 $glowColor;
-  }
-}
-
-@keyframes animation-3-trigram-sky {
-  0% {
-    opacity: 0;
-  }
-  
-  2%, 66% {
-    opacity: 1;
-  }
-
-  90%, 100% {
-    opacity: 0;
-  }
-}
-
-@keyframes animation-3-trigram-lake {
-  0%, 8% {
-    opacity: 0;
-  }
-
-  10%, 66% {
-    opacity: 1;
-  }
-
-  90%, 100% {
-    opacity: 0;
-  }
-}
-
-@keyframes animation-3-trigram-fire {
-  0%, 16% {
-    opacity: 0;
-  }
-
-  18%, 66% {
-    opacity: 1;
-  }
-
-  90%, 100% {
-    opacity: 0;
-  }
-}
-
-@keyframes animation-3-trigram-thunder {
-  0%, 24% {
-    opacity: 0;
-  }
-
-  26%, 66% {
-    opacity: 1;
-  }
-
-  90%, 100% {
-    opacity: 0;
-  }
-}
-
-@keyframes animation-3-trigram-earth {
-  0%, 32% {
-    opacity: 0;
-  }
-
-  34%, 66% {
-    opacity: 1;
-  }
-
-  90%, 100% {
-    opacity: 0;
-  }
-}
-
-@keyframes animation-3-trigram-mountain {
-  0%, 40% {
-    opacity: 0;
-  }
-
-  42%, 66% {
-    opacity: 1;
-  }
-
-  90%, 100% {
-    opacity: 0;
-  }
-}
-
-@keyframes animation-3-trigram-water {
-  0%, 48% {
-    opacity: 0;
-  }
-
-  50%, 66% {
-    opacity: 1;
-  }
-
-  90%, 100% {
-    opacity: 0;
-  }
-}
-
-@keyframes animation-3-trigram-wind {
-  0%, 56% {
-    opacity: 0;
-  }
-
-  58%, 66% {
-    opacity: 1;
-  }
-
-  90%, 100% {
-    opacity: 0;
+  .github-fork-ribbon {
+    &:before {
+      background-color: #00b8ff;
+    }
   }
 }
 
@@ -802,12 +835,13 @@ html, body {
 ;
 }
 
-.left, .right {
+.left, .right, .colors {
   font-size: 3em;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   color: #fff;
+  text-shadow: 0 0 0.2em #000;
 
   &:hover {
     transform: scale(1.1) translateY(-50%);
@@ -828,6 +862,7 @@ html, body {
 
   @media (max-width: 600px) {
     left: 0.1em;
+    opacity: 0.5;
   }
 }
 
@@ -836,6 +871,23 @@ html, body {
 
   @media (max-width: 600px) {
     right: 0.1em;
+    opacity: 0.5;
+  }
+}
+
+.colors {
+  bottom: 1em;
+  left: 50%;
+  top: auto;
+  transform: translateX(-50%);
+
+  &:hover {
+    transform: scale(1.1) translateX(-50%);
+  }
+
+  @media (max-width: 600px) {
+    bottom: 0.1em;
+    opacity: 0.5;
   }
 }
 

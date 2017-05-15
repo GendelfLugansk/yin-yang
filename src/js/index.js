@@ -51,4 +51,8 @@ $(function () {
             window.location.hash = next.attr('id');
         }
     });
+
+    $('.colors').click(function () {
+        $('body').toggleClass('light-colors');
+    });
 });
