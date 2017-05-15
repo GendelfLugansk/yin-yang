@@ -1,0 +1,28 @@
+{
+  "name": "yin-yang-animation",
+  "version": "1.0.0",
+  "description": "Yin yang animation",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gennady Dogaev",
+  "license": "MIT",
+  "devDependencies": {
+    "font-awesome": "^4.7.0",
+    "github-fork-ribbon-css": "^0.2.1",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-clean-css": "^3.0.4",
+    "gulp-concat": "^2.6.1",
+    "gulp-connect": "^5.0.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-notify": "^3.0.0",
+    "gulp-order": "^1.1.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.4.1",
+    "gulp-uglify": "^2.0.1",
+    "jquery": "^3.2.1"
+  }
+}

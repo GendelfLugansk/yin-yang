@@ -1,0 +1,902 @@
+//----------------------------------------------------------------------------------------------------------------------
+// Configuration
+//----------------------------------------------------------------------------------------------------------------------
+
+$taijituSize: 200px;
+$whiteBgColor: #fff;
+$blackBgColor: #000;
+$taijituBorderWidth: 4px;
+$baseZIndex: 0;
+$glowColor: #98ff00;
+$animation1Duration: 3s;
+$animation2Duration: 12s;
+$animation3Duration: 12s;
+$animation4SpinDuration: 4s;
+
+//----------------------------------------------------------------------------------------------------------------------
+// Basic taijitu styles
+//----------------------------------------------------------------------------------------------------------------------
+
+.taijitu {
+  box-sizing: border-box;
+  width: $taijituSize;
+  height: $taijituSize;
+  border-radius: $taijituSize/2;
+  position: relative;
+  z-index: $baseZIndex;
+
+  .white {
+    box-sizing: border-box;
+    background-color: $whiteBgColor;
+    height: $taijituSize;
+    width: $taijituSize/2;
+    border-top-left-radius: $taijituSize/2;
+    border-bottom-left-radius: $taijituSize/2;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &::before {
+      content: '';
+      box-sizing: border-box;
+      background-color: $whiteBgColor;
+      height: $taijituSize/2;
+      width: $taijituSize/2;
+      border-radius: $taijituSize/4;
+      position: absolute;
+      top: 0;
+      left: $taijituSize/4;
+      z-index: $baseZIndex + 1;
+    }
+
+    &::after {
+      content: '';
+      box-sizing: border-box;
+      background-color: $blackBgColor;
+      height: $taijituSize/8;
+      width: $taijituSize/8;
+      border-radius: $taijituSize/16;
+      position: absolute;
+      top: 25%;
+      left: $taijituSize/2;
+      z-index: $baseZIndex + 1;
+      transform: translateY(-50%) translateX(-50%);
+    }
+  }
+
+  .black {
+    box-sizing: border-box;
+    background-color: $blackBgColor;
+    height: $taijituSize;
+    width: $taijituSize/2;
+    border-top-right-radius: $taijituSize/2;
+    border-bottom-right-radius: $taijituSize/2;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    &::before {
+      content: '';
+      box-sizing: border-box;
+      background-color: $blackBgColor;
+      height: $taijituSize/2;
+      width: $taijituSize/2;
+      border-radius: $taijituSize/4;
+      position: absolute;
+      bottom: 0;
+      right: $taijituSize/4;
+    }
+
+    &::after {
+      content: '';
+      box-sizing: border-box;
+      background-color: $whiteBgColor;
+      height: $taijituSize/8;
+      width: $taijituSize/8;
+      border-radius: $taijituSize/16;
+      position: absolute;
+      bottom: 25%;
+      right: $taijituSize/2;
+      transform: translateY(50%) translateX(50%);
+    }
+  }
+
+  &::after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    width: $taijituSize;
+    height: $taijituSize;
+    border-radius: $taijituSize/2;
+    border: $taijituBorderWidth solid $blackBgColor;
+    top: 0;
+    left: 0;
+    z-index: $baseZIndex + 2;
+    box-shadow: 0 0 $taijituSize/6 $taijituSize/20 lighten($glowColor, 45%),
+    0 0 $taijituSize/3 0 $glowColor,
+    0 0 $taijituSize $taijituSize/4 lighten($glowColor, 30%),
+    inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
+    inset 0 0 $taijituSize/1.4 0 $glowColor;
+  }
+
+  .trigram {
+    position: absolute;
+    bottom: calc(100% + #{$taijituSize/10});
+    width: $taijituSize/6;
+    left: $taijituSize/2 - $taijituSize/10;
+    transform-origin: 50% calc(100% + #{$taijituSize/10 + $taijituSize/2});
+    z-index: $baseZIndex + 3;
+
+    > div {
+      width: 100%;
+      height: $taijituSize/40;
+      margin-bottom: $taijituSize/50;
+      position: relative;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &::before, &::after {
+        height: 100%;
+        width: 43%;
+        position: absolute;
+        top: 0;
+        background-color: $blackBgColor;
+        box-shadow: 0 0 $taijituSize/6 0 $glowColor;
+      }
+
+      &::before {
+        left: 0;
+      }
+
+      &::after {
+        right: 0;
+      }
+
+      &.solid {
+        &::before {
+          content: '';
+          width: 100%;
+        }
+      }
+
+      &.dashed {
+        &::before, &::after {
+          content: '';
+        }
+      }
+    }
+
+    &.sky {
+      > div {
+        @extend .solid;
+      }
+    }
+
+    &.wind {
+      transform: rotate(45deg);
+
+      > div:nth-child(1),
+      > div:nth-child(2) {
+        @extend .solid;
+      }
+
+      > div:nth-child(3) {
+        @extend .dashed;
+      }
+    }
+
+    &.water {
+      transform: rotate(90deg);
+
+      > div:nth-child(1),
+      > div:nth-child(3) {
+        @extend .dashed;
+      }
+
+      > div:nth-child(2) {
+        @extend .solid;
+      }
+    }
+
+    &.mountain {
+      transform: rotate(135deg);
+
+      > div:nth-child(1) {
+        @extend .solid;
+      }
+
+      > div:nth-child(2), > div:nth-child(3) {
+        @extend .dashed;
+      }
+    }
+
+    &.earth {
+      transform: rotate(180deg);
+
+      > div {
+        @extend .dashed;
+      }
+    }
+
+    &.thunder {
+      transform: rotate(225deg);
+
+      > div:nth-child(1), > div:nth-child(2) {
+        @extend .dashed;
+      }
+
+      > div:nth-child(3) {
+        @extend .solid;
+      }
+    }
+
+    &.fire {
+      transform: rotate(270deg);
+
+      > div:nth-child(1),
+      > div:nth-child(3) {
+        @extend .solid;
+      }
+
+      > div:nth-child(2) {
+        @extend .dashed;
+      }
+    }
+
+    &.lake {
+      transform: rotate(315deg);
+
+      > div:nth-child(1) {
+        @extend .dashed;
+      }
+
+      > div:nth-child(2), > div:nth-child(3) {
+        @extend .solid;
+      }
+    }
+  }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+// Animations
+//----------------------------------------------------------------------------------------------------------------------
+
+.taijitu {
+
+  //Animation 1 - just glow
+  &.animation-1 {
+    &::after {
+      animation: animation-1-taijitu-glow $animation1Duration alternate-reverse infinite;
+    }
+
+    .trigram > div {
+      &::before, &::after {
+        animation: animation-1-trigram-glow $animation1Duration alternate-reverse infinite;
+      }
+    }
+  }
+
+  //Animation 2 - glow and trigram appearance
+  &.animation-2 {
+    &::after {
+      box-shadow: 0 0 $taijituSize/24 $taijituSize/80 lighten($glowColor, 45%),
+      0 0 $taijituSize/6 0 $glowColor,
+      0 0 $taijituSize/4 $taijituSize/16 lighten($glowColor, 30%),
+      inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
+      inset 0 0 $taijituSize/1.4 0 $glowColor;
+      animation: animation-2-taijitu-glow $animation2Duration infinite linear;
+      animation-delay: $animation2Duration*.72/9;
+    }
+
+    .trigram > div {
+      &::before, &::after {
+        animation: animation-2-trigram-glow $animation2Duration infinite linear;
+        animation-delay: $animation2Duration*.72/9;
+      }
+    }
+
+    .trigram {
+      opacity: 0;
+      animation-fill-mode: forwards;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      animation-duration: $animation2Duration;
+      animation-delay: $animation2Duration*.72/9;
+
+      &.sky {
+        animation-name: animation-2-trigram-sky;
+      }
+      &.wind {
+        animation-name: animation-2-trigram-wind;
+      }
+      &.water {
+        animation-name: animation-2-trigram-water;
+      }
+      &.mountain {
+        animation-name: animation-2-trigram-mountain;
+      }
+      &.earth {
+        animation-name: animation-2-trigram-earth;
+      }
+      &.thunder {
+        animation-name: animation-2-trigram-thunder;
+      }
+      &.fire {
+        animation-name: animation-2-trigram-fire;
+      }
+      &.lake {
+        animation-name: animation-2-trigram-lake;
+      }
+    }
+  }
+
+  &.animation-2-a {
+    @extend .animation-2;
+
+    &::after {
+      animation-duration: $animation2Duration/3;
+    }
+  }
+
+  //Animation 3 - the same as 2, but other appearance direction
+  &.animation-3 {
+    &::after {
+      box-shadow: 0 0 $taijituSize/24 $taijituSize/80 lighten($glowColor, 45%),
+      0 0 $taijituSize/6 0 $glowColor,
+      0 0 $taijituSize/4 $taijituSize/16 lighten($glowColor, 30%),
+      inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
+      inset 0 0 $taijituSize/1.4 0 $glowColor;
+      animation: animation-3-taijitu-glow $animation3Duration infinite linear;
+      animation-delay: $animation3Duration*.72/9;
+    }
+
+    .trigram > div {
+      &::before, &::after {
+        animation: animation-3-trigram-glow $animation3Duration infinite linear;
+        animation-delay: $animation3Duration*.72/9;
+      }
+    }
+
+    .trigram {
+      opacity: 0;
+      animation-fill-mode: forwards;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      animation-duration: $animation3Duration;
+      animation-delay: $animation3Duration*.72/9;
+
+      &.sky {
+        animation-name: animation-3-trigram-sky;
+      }
+      &.wind {
+        animation-name: animation-3-trigram-wind;
+      }
+      &.water {
+        animation-name: animation-3-trigram-water;
+      }
+      &.mountain {
+        animation-name: animation-3-trigram-mountain;
+      }
+      &.earth {
+        animation-name: animation-3-trigram-earth;
+      }
+      &.thunder {
+        animation-name: animation-3-trigram-thunder;
+      }
+      &.fire {
+        animation-name: animation-3-trigram-fire;
+      }
+      &.lake {
+        animation-name: animation-3-trigram-lake;
+      }
+    }
+  }
+
+  &.animation-3-a {
+    @extend .animation-3;
+
+    &::after {
+      animation-duration: $animation3Duration/3;
+    }
+  }
+
+  //Animation 1 + rotate
+  &.animation-4 {
+    @extend .animation-1;
+    animation: spin $animation4SpinDuration infinite;
+  }
+}
+
+//Keyframes for first animation
+@keyframes animation-1-taijitu-glow {
+  0% {
+    box-shadow: 0 0 $taijituSize/6 $taijituSize/20 lighten($glowColor, 45%),
+    0 0 $taijituSize/3 0 $glowColor,
+    0 0 $taijituSize $taijituSize/4 lighten($glowColor, 30%),
+    inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
+    inset 0 0 $taijituSize/1.4 0 $glowColor;
+  }
+
+  100% {
+    box-shadow: 0 0 $taijituSize/12 $taijituSize/40 lighten($glowColor, 45%),
+    0 0 $taijituSize/6 0 $glowColor,
+    0 0 $taijituSize/2 $taijituSize/8 lighten($glowColor, 30%),
+    inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
+    inset 0 0 $taijituSize/1.4 0 $glowColor;
+  }
+}
+
+@keyframes animation-1-trigram-glow {
+  0% {
+    box-shadow: 0 0 $taijituSize/6 0 $glowColor;
+  }
+
+  100% {
+    box-shadow: 0 0 $taijituSize/12 0 $glowColor;
+  }
+}
+
+//Rotation keyframe for animation-4
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+//Keyframes for second animation
+@keyframes animation-2-taijitu-glow {
+  0% {
+    box-shadow: 0 0 $taijituSize/24 $taijituSize/80 lighten($glowColor, 45%),
+    0 0 $taijituSize/6 0 $glowColor,
+    0 0 $taijituSize/4 $taijituSize/16 lighten($glowColor, 30%),
+    inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
+    inset 0 0 $taijituSize/1.4 0 $glowColor;
+  }
+
+  66% {
+    box-shadow: 0 0 $taijituSize/6 $taijituSize/20 lighten($glowColor, 45%),
+    0 0 $taijituSize/3 0 $glowColor,
+    0 0 $taijituSize $taijituSize/4 lighten($glowColor, 30%),
+    inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
+    inset 0 0 $taijituSize/1.4 0 $glowColor;
+  }
+
+  90%, 100% {
+    box-shadow: 0 0 $taijituSize/24 $taijituSize/80 lighten($glowColor, 45%),
+    0 0 $taijituSize/6 0 $glowColor,
+    0 0 $taijituSize/4 $taijituSize/16 lighten($glowColor, 30%),
+    inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
+    inset 0 0 $taijituSize/1.4 0 $glowColor;
+  }
+}
+
+@keyframes animation-2-trigram-glow {
+  0% {
+    box-shadow: 0 0 $taijituSize/12 0 $glowColor;
+  }
+
+  66% {
+    box-shadow: 0 0 $taijituSize/6 0 $glowColor;
+  }
+
+  90%, 100% {
+    box-shadow: 0 0 $taijituSize/12 0 $glowColor;
+  }
+}
+
+@keyframes animation-2-trigram-sky {
+  0% {
+    opacity: 0;
+  }
+  
+  2%, 66% {
+    opacity: 1;
+  }
+
+  90%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes animation-2-trigram-wind {
+  0%, 8% {
+    opacity: 0;
+  }
+
+  10%, 66% {
+    opacity: 1;
+  }
+
+  90%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes animation-2-trigram-water {
+  0%, 16% {
+    opacity: 0;
+  }
+
+  18%, 66% {
+    opacity: 1;
+  }
+
+  90%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes animation-2-trigram-mountain {
+  0%, 24% {
+    opacity: 0;
+  }
+
+  26%, 66% {
+    opacity: 1;
+  }
+
+  90%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes animation-2-trigram-earth {
+  0%, 32% {
+    opacity: 0;
+  }
+
+  34%, 66% {
+    opacity: 1;
+  }
+
+  90%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes animation-2-trigram-thunder {
+  0%, 40% {
+    opacity: 0;
+  }
+
+  42%, 66% {
+    opacity: 1;
+  }
+
+  90%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes animation-2-trigram-fire {
+  0%, 48% {
+    opacity: 0;
+  }
+
+  50%, 66% {
+    opacity: 1;
+  }
+
+  90%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes animation-2-trigram-lake {
+  0%, 56% {
+    opacity: 0;
+  }
+
+  58%, 66% {
+    opacity: 1;
+  }
+
+  90%, 100% {
+    opacity: 0;
+  }
+}
+
+//Animation 3 keyframes
+@keyframes animation-3-taijitu-glow {
+  0% {
+    box-shadow: 0 0 $taijituSize/24 $taijituSize/80 lighten($glowColor, 45%),
+    0 0 $taijituSize/6 0 $glowColor,
+    0 0 $taijituSize/4 $taijituSize/16 lighten($glowColor, 30%),
+    inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
+    inset 0 0 $taijituSize/1.4 0 $glowColor;
+  }
+
+  66% {
+    box-shadow: 0 0 $taijituSize/6 $taijituSize/20 lighten($glowColor, 45%),
+    0 0 $taijituSize/3 0 $glowColor,
+    0 0 $taijituSize $taijituSize/4 lighten($glowColor, 30%),
+    inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
+    inset 0 0 $taijituSize/1.4 0 $glowColor;
+  }
+
+  90%, 100% {
+    box-shadow: 0 0 $taijituSize/24 $taijituSize/80 lighten($glowColor, 45%),
+    0 0 $taijituSize/6 0 $glowColor,
+    0 0 $taijituSize/4 $taijituSize/16 lighten($glowColor, 30%),
+    inset 0 0 $taijituSize/3 $taijituSize/20 #fff,
+    inset 0 0 $taijituSize/1.4 0 $glowColor;
+  }
+}
+
+@keyframes animation-3-trigram-glow {
+  0% {
+    box-shadow: 0 0 $taijituSize/12 0 $glowColor;
+  }
+
+  66% {
+    box-shadow: 0 0 $taijituSize/6 0 $glowColor;
+  }
+
+  90%, 100% {
+    box-shadow: 0 0 $taijituSize/12 0 $glowColor;
+  }
+}
+
+@keyframes animation-3-trigram-sky {
+  0% {
+    opacity: 0;
+  }
+  
+  2%, 66% {
+    opacity: 1;
+  }
+
+  90%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes animation-3-trigram-lake {
+  0%, 8% {
+    opacity: 0;
+  }
+
+  10%, 66% {
+    opacity: 1;
+  }
+
+  90%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes animation-3-trigram-fire {
+  0%, 16% {
+    opacity: 0;
+  }
+
+  18%, 66% {
+    opacity: 1;
+  }
+
+  90%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes animation-3-trigram-thunder {
+  0%, 24% {
+    opacity: 0;
+  }
+
+  26%, 66% {
+    opacity: 1;
+  }
+
+  90%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes animation-3-trigram-earth {
+  0%, 32% {
+    opacity: 0;
+  }
+
+  34%, 66% {
+    opacity: 1;
+  }
+
+  90%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes animation-3-trigram-mountain {
+  0%, 40% {
+    opacity: 0;
+  }
+
+  42%, 66% {
+    opacity: 1;
+  }
+
+  90%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes animation-3-trigram-water {
+  0%, 48% {
+    opacity: 0;
+  }
+
+  50%, 66% {
+    opacity: 1;
+  }
+
+  90%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes animation-3-trigram-wind {
+  0%, 56% {
+    opacity: 0;
+  }
+
+  58%, 66% {
+    opacity: 1;
+  }
+
+  90%, 100% {
+    opacity: 0;
+  }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+// Page and containers
+//----------------------------------------------------------------------------------------------------------------------
+
+html, body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  color: #fff;
+  position: relative;
+
+  h1 {
+    box-sizing: border-box;
+    position: absolute;
+    top: 1em;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: 'PT Serif Caption', serif;
+    padding: 0 5em;
+  }
+
+  @media (max-width: 960px) {
+    h1 {
+      font-size: 1rem;
+      padding: 0 1em;
+    }
+  }
+
+  /**
+   * Ban IE
+   */
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    display: none;
+  }
+  display: none \9
+;
+}
+
+.left, .right {
+  font-size: 3em;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+
+  &:hover {
+    transform: scale(1.1) translateY(-50%);
+  }
+
+  /**
+   * Ban IE
+   */
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    display: none;
+  }
+  display: none \9
+;
+}
+
+.left {
+  left: 1em;
+
+  @media (max-width: 600px) {
+    left: 0.1em;
+  }
+}
+
+.right {
+  right: 1em;
+
+  @media (max-width: 600px) {
+    right: 0.1em;
+  }
+}
+
+.github-fork-ribbon {
+  &:before {
+    background-color: #7cd300;
+  }
+
+  @media (max-width: 600px) {
+    display: none;
+  }
+
+  /**
+   * Ban IE
+   */
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    display: none;
+  }
+  display: none \9
+;
+}
+
+.old-browser {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  max-width: 800px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 32px;
+  color: #333;
+
+  .browser-icons a {
+    opacity: 0.3;
+  }
+
+  .subheader {
+    padding-top: 1em;
+    font-size: 0.5em;
+  }
+
+  .browser-icons {
+    padding-top: 0.5em;
+    font-size: 5em;
+
+    a, a:visited, a:active {
+      color: inherit;
+      transition: opacity 0.5s;
+    }
+
+    a:hover {
+      opacity: 0.7;
+    }
+  }
+
+  display: none;
+  display: block \9
+;
+
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    display: block;
+  }
+}
