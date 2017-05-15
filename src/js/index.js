@@ -8,7 +8,7 @@ $(function () {
                 return true;
             }
         });
-        if (container.length === 1 && !container.is(currentContainer) && container.css('display') !== 'flex') {
+        if (container.length === 1 && !container.is(currentContainer) && container.css('display') !== 'flex' && $('.old-browser').css('display') === 'none') {
             containers.css({display: 'none'});
             container.css({display: 'flex'})
         }
