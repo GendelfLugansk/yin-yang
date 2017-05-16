@@ -114,7 +114,7 @@
   .trigram {
     position: absolute;
     bottom: calc(100% + #{$taijituSize/10});
-    width: $taijituSize/6;
+    width: $taijituSize/5;
     left: $taijituSize/2 - $taijituSize/10;
     transform-origin: 50% calc(100% + #{$taijituSize/10 + $taijituSize/2});
     z-index: $baseZIndex + 3;
@@ -122,7 +122,7 @@
     > div {
       width: 100%;
       height: $taijituSize/40;
-      margin-bottom: $taijituSize/50;
+      margin-bottom: $taijituSize/40;
       position: relative;
 
       &:last-child {
