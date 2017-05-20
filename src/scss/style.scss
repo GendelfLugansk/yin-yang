@@ -4,7 +4,7 @@
 
 @mixin taijitu(
   $taijituSize: 200px, $glowColor: #98ff00, $animation1Duration: 3s, $animation2Duration: 12s,
-  $animation3Duration: 12s,$animation4SpinDuration: 4s, $taijituBorderWidth: 4px, $blackBgColor: #000, $whiteBgColor: #fff, $baseZIndex: 0) {
+  $animation3Duration: 12s,$animation4Duration: 3s, $taijituBorderWidth: 4px, $blackBgColor: #000, $whiteBgColor: #fff, $baseZIndex: 0) {
 
   //--------------------------------------------------------------------------------------------------------------------
   // Basic taijitu styles
@@ -280,12 +280,12 @@
   //Animation 1 - just glow
   &.animation-1 {
     &::after {
-      animation: $animation-1-taijitu-glow $animation1Duration alternate-reverse infinite;
+      animation: $animation-1-taijitu-glow $animation1Duration alternate-reverse infinite ease-in-out;
     }
 
     .trigram > div {
       &::before, &::after {
-        animation: $animation-1-trigram-glow $animation1Duration alternate-reverse infinite;
+        animation: $animation-1-trigram-glow $animation1Duration alternate-reverse infinite ease-in-out;
       }
     }
   }
@@ -417,7 +417,9 @@
   //Animation 1 + rotate
   &.animation-4 {
     @extend .animation-1;
-    animation: $animation-spin $animation4SpinDuration infinite;
+    animation-duration: $animation4Duration;
+
+    animation: $animation-spin $animation4Duration infinite ease-in-out;
   }
 
   //Keyframes for first animation
