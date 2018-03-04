@@ -770,7 +770,7 @@
 }
 
 .taijitu {
-  @include taijitu(216px);
+  @include taijitu(150px);
 }
 
 body.light-colors {
@@ -779,7 +779,7 @@ body.light-colors {
     color: #000;
 
     .taijitu {
-      @include taijitu(216px, #00b8ff);
+      @include taijitu(150px, #00b8ff);
     }
   }
 
